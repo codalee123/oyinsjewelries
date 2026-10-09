@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+html{
+  scroll-behavior: smooth;
+}
+
+@theme {
+  --color-brand-pink: #F8E7EC;
+  --color-brand-rose: #A52A50;
+  --color-brand-burgundy: #641D35;
+  --color-brand-cream: #FFF9F6;
+}
