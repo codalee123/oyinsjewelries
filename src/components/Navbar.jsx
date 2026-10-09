@@ -11,9 +11,9 @@ function Navbar({ cart, setIsCartOpen }) {
     <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-brand-pink bg-brand-cream px-6 py-5 md:px-12">
 
       {/* Brand name */}
-      <h1 className="text-2xl font-extrabold tracking-tight text-brand-burgundy">
+      <a href="#home"  className="text- cursor-pointer font-extrabold tracking-tight text-brand-burgundy">
         Oyinsjewelries
-      </h1>
+      </a>
 
       {/* Desktop navigation */}
       <div className="hidden items-center gap-6 md:flex">
