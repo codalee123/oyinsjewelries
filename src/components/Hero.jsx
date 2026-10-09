@@ -119,7 +119,7 @@
 
 
 
-
+import JewelryVideo from "../assets/videos/jewelry-video.mp4"
 import { ArrowRight } from "lucide-react"
 function Hero() {
   return (
@@ -159,16 +159,26 @@ function Hero() {
           </p>
         </div>
 
-        {/* Hero image */}
-        <div className="relative">
-          <div className="absolute -inset-3 rotate-3 rounded-4xl bg-brand-rose/20"></div>
+        
+      {/* Hero video */}
+      <div className="relative">
+        <div className="absolute -inset-3 rotate-3 rounded-4xl bg-brand-rose/20"></div>
 
-          <img
-            src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=1000&q=85"
-            alt="Elegant gold jewelry collection"
-            className="relative h-[350px] w-full rounded-4xl object-cover shadow-xl md:h-[520px]"
+        <div className="relative h-87.5 w-full overflow-hidden rounded-4xl bg-brand-burgundy shadow-xl md:h-130">
+          <video
+            src={JewelryVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=1000&q=85"
+            className="absolute inset-0 h-full w-full object-cover"
           />
 
+          {/* Soft overlay */}
+          <div className="absolute inset-0 bg-black/15"></div>
+
+          {/* Decorative label */}
           <div className="absolute bottom-5 left-5 rounded-2xl bg-brand-cream/95 px-5 py-4 shadow-lg">
             <p className="text-xs font-semibold uppercase tracking-widest text-brand-rose">
               Made for your moments
@@ -178,7 +188,7 @@ function Hero() {
             </p>
           </div>
         </div>
-
+      </div>
       </div>
     </section>
   )
