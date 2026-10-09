@@ -13,8 +13,8 @@ function ProductCard({ product, setCart }) {
         </span>
       </div>
 
-      <div className="mt-4">
-        <h3 className="font-medium text-lg">
+      <div className=" flex h-45 flex-col">
+        <h3 className=" min-h-12 leading-6 font-medium text-base">
           {product.name}
         </h3>
 
