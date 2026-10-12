@@ -1,4 +1,6 @@
 import { ArrowRight } from "lucide-react"
+import ClassicEaring from "../assets/images/Classic-Earing.avif"
+import AboutVideo from "../assets/videos/About-video.mp4"
 function About() {
   return (
     <section
@@ -9,13 +11,23 @@ function About() {
 
         {/* About image */}
         <div className="relative">
-          <div className="absolute -inset-3 -rotate-2 rounded-[2rem] bg-brand-pink" />
+          <div className="absolute -inset-3 -rotate-2 rounded-4xl bg-brand-pink" />
 
-          <img
-            src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=1000&q=85"
-            alt="Gold jewelry pieces arranged elegantly"
-            className="relative h-80 w-full rounded-[2rem] object-cover md:h-[440px]"
-          />
+            <div className="relative h-87.5 w-full overflow-hidden rounded-4xl bg-brand-burgundy shadow-xl md:h-130">
+                        <video
+                          src={AboutVideo}
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          poster="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=1000&q=85"
+                          className="absolute inset-0 h-full w-full object-cover"
+                        />
+              
+                   {/* Soft overlay */}
+                   <div className="absolute inset-0 bg-black/15"></div>
+
+                 </div>  
         </div>
 
         {/* About content */}

@@ -17,6 +17,9 @@ import GoldHandchain from "../assets/images/Gold-Handchain.jpg"
 import GoldAnklet from "../assets/images/Gold-Anklet.jpg"
 import LuxuryRing from "../assets/images/Luxury-ring.jpg"
 import GoldRing from "../assets/images/Gold-ring.jpg"
+import PearlNecklace from "../assets/images/Pearl-Necklace.jpg"
+import ClassicEaring from "../assets/images/Classic-Earing.avif"
+import SilverRing from "../assets/images/Silver-ring.jpg"
 const products = [
   // WRISTWATCHES
   {
@@ -56,7 +59,7 @@ const products = [
     name: "Pearl Necklace",
     category: "Necklaces",
     price: 25000,
-    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+    image: PearlNecklace,
   },
   {
     id: 6,
@@ -93,7 +96,7 @@ const products = [
     name: "Classic Hoop Earrings",
     category: "Earrings",
     price: 10000,
-    image: "https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=800&q=80",
+    image: ClassicEaring,
   },
 
   // BRACELETS
@@ -132,7 +135,7 @@ const products = [
     name: "Elegant Silver Ring",
     category: "Rings",
     price: 10000,
-    image: "https://images.unsplash.com/photo-1603561596112-0a132b757442?auto=format&fit=crop&w=800&q=80",
+    image: SilverRing,
   },
   {
     id: 16,
