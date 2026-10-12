@@ -1,5 +1,4 @@
 import { ArrowRight } from "lucide-react"
-import ClassicEaring from "../assets/images/Classic-Earing.avif"
 import AboutVideo from "../assets/videos/About-video.mp4"
 function About() {
   return (
@@ -20,7 +19,7 @@ function About() {
                           muted
                           loop
                           playsInline
-                          poster="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=1000&q=85"
+                          poster="../assets/images/Classic-Earing.avif"
                           className="absolute inset-0 h-full w-full object-cover"
                         />
               

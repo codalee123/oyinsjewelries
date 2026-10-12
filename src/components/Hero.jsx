@@ -119,7 +119,7 @@
 
 
 
-import JewelryVideo from "../assets/videos/jewelry-video.mp4"
+import HeroVideo from "../assets/videos/Hero-video.mp4"
 import { ArrowRight } from "lucide-react"
 function Hero() {
   return (
@@ -166,7 +166,7 @@ function Hero() {
 
         <div className="relative h-87.5 w-full overflow-hidden rounded-4xl bg-brand-burgundy shadow-xl md:h-130">
           <video
-            src={JewelryVideo}
+            src={HeroVideo}
             autoPlay
             muted
             loop
