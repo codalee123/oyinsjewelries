@@ -2,6 +2,8 @@ import products from "../data/products"
 import ProductCard from "./ProductCard"
 
 function Products({products,setCart}) {
+
+  
   return (
     <section 
       id="shop"

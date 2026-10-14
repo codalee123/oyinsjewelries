@@ -1,5 +1,11 @@
-import { Heart, X, Minus, Plus, ArrowRight } from "lucide-react"
+import { Heart, X, Minus, Plus, MoveRight } from "lucide-react"
+import { supabase } from "../lib/supabase"
+import { useState } from "react"
 function Cart({ cart, setCart, setIsCartOpen }) {
+
+  const [checkingStock, setCheckingStock] = useState(false)
+  const [stockError, setStockError] = useState("")
+  
   const total = cart.reduce(
     (sum, product) => sum + product.price * product.quantity,
     0
@@ -21,6 +27,94 @@ ${orderMessage}
 Total: ₦${total.toLocaleString()}
 
 Thank you.`
+
+
+
+async function handleWhatsAppCheckout() {
+  setCheckingStock(true)
+  setStockError("")
+
+  try {
+    const productIds = cart.map((product) => product.id)
+
+    const { data: latestProducts, error } = await supabase
+      .from("products")
+      .select("id, name, price, in_stock")
+      .in("id", productIds)
+
+    if (error) throw error
+
+    const unavailableProducts = cart.filter((cartProduct) => {
+      const latestProduct = latestProducts.find(
+        (product) => product.id === cartProduct.id
+      )
+
+      return !latestProduct || !latestProduct.in_stock
+    })
+
+    if (unavailableProducts.length > 0) {
+      setStockError(
+        `Please remove unavailable products before checkout: ${unavailableProducts
+          .map((product) => product.name)
+          .join(", ")}.`
+      )
+      setCheckingStock(false)
+      return
+    }
+
+    // Use current database prices, not potentially outdated cart prices.
+    const currentCart = cart.map((cartProduct) => {
+      const latestProduct = latestProducts.find(
+        (product) => product.id === cartProduct.id
+      )
+
+      return {
+        ...cartProduct,
+        name: latestProduct.name,
+        price: Number(latestProduct.price),
+      }
+    })
+
+    const orderMessage = currentCart
+      .map(
+        (product, index) =>
+          `${index + 1}. ${product.name}
+Quantity: ${product.quantity}
+Price: ₦${(
+            product.price * product.quantity
+          ).toLocaleString()}`
+      )
+      .join("\n\n")
+
+    const total = currentCart.reduce(
+      (sum, product) => sum + product.price * product.quantity,
+      0
+    )
+
+    const message = `Hello, I would like to place an order.
+
+${orderMessage}
+
+Total: ₦${total.toLocaleString()}
+
+Thank you.`
+
+    const phoneNumber = "2348130782284"
+
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      message
+    )}`
+
+    window.open(whatsappUrl, "_blank")
+  } catch (error) {
+    setStockError(
+      "We couldn't verify product availability. Please try again."
+    )
+  } finally {
+    setCheckingStock(false)
+  }
+}
+
 
   return (
     <>
@@ -186,20 +280,28 @@ Thank you.`
               Delivery details can be confirmed on WhatsApp.
             </p>
 
+            {stockError && (
+              <p role="alert" className="mt-3 text-sm text-red-600">
+                {stockError}
+              </p>
+            )}
+
+            
             <button
-              onClick={() => {
-                const phoneNumber = "2348130782284"
-
-                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-                  message
-                )}`
-
-                window.open(whatsappUrl, "_blank")
-              }}
-              className="mt-5 w-full rounded-full bg-brand-burgundy py-4 font-bold text-white transition duration-300 hover:bg-brand-rose"
+              onClick={handleWhatsAppCheckout}
+              disabled={checkingStock}
+              className="mt-5 w-full rounded-full bg-brand-burgundy py-4 font-bold text-white transition duration-300 hover:bg-brand-rose disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Order via WhatsApp →
+              {checkingStock ? (
+                  "Checking availability..."
+                ) : (
+                  <span className="flex items-center justify-center gap-2">
+                    Order via WhatsApp
+                    <MoveRight size={18} />
+                  </span>
+                )}
             </button>
+          
           </div>
         )}
       </section>
