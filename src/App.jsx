@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
 import { Routes, Route } from "react-router-dom"
-import AdminLogin from "./pages/AdminLogin"
-import AdminDashboard from "./pages/AdminDashboard"
+import { lazy, Suspense } from "react"
+const AdminLogin = lazy(() => import("./pages/AdminLogin.jsx"))
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard.jsx"))
 import {supabase} from "./lib/supabase"
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
@@ -60,53 +61,56 @@ function App() {
 
   
 return (
-  <Routes>
-    <Route
-      path="/admin"
-      element={<AdminLogin />}
-    />
 
-    <Route
-      path="/admin/dashboard"
-      element={<AdminDashboard />}
-    />
+  <Suspense fallback={<p className="p-6 text-center">Loading...</p>}>
+      <Routes>
+        <Route
+          path="/admin"
+          element={<AdminLogin />}
+        />
 
-    <Route
-      path="*"
-      element={
-        <>
-          <Navbar
-            cart={cart}
-            setIsCartOpen={setIsCartOpen}
-          />
+        <Route
+          path="/admin/dashboard"
+          element={<AdminDashboard />}
+        />
 
-          <Hero />
+        <Route
+          path="*"
+          element={
+            <>
+              <Navbar
+                cart={cart}
+                setIsCartOpen={setIsCartOpen}
+              />
 
-          <Categories
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-          />
+              <Hero />
 
-          <Products
-            setCart={setCart}
-            products={filteredProducts}
-          />
+              <Categories
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+              />
 
-          <About />
-          <Contact />
-          <Footer />
+              <Products
+                setCart={setCart}
+                products={filteredProducts}
+              />
 
-          {isCartOpen && (
-            <Cart
-              cart={cart}
-              setCart={setCart}
-              setIsCartOpen={setIsCartOpen}
-            />
-          )}
-        </>
-      }
-    />
-  </Routes>
+              <About />
+              <Contact />
+              <Footer />
+
+              {isCartOpen && (
+                <Cart
+                  cart={cart}
+                  setCart={setCart}
+                  setIsCartOpen={setIsCartOpen}
+                />
+              )}
+            </>
+          }
+        />
+      </Routes>
+  </Suspense>    
 )
 
 }
