@@ -1,6 +1,6 @@
 import { MessageCircleMore } from "lucide-react"
 function Contact() {
-  const phoneNumber = "2348130782284"
+  const phoneNumber = "2348108161055"
   const message = encodeURIComponent(
     "Hello Oyinsjewelries, I would like to make an enquiry about a product before proceeding to pay."
   )

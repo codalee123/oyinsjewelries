@@ -99,7 +99,7 @@ Total: ₦${total.toLocaleString()}
 
 Thank you.`
 
-    const phoneNumber = "2348130782284"
+    const phoneNumber = "2348108161055"
 
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message
